@@ -54,8 +54,7 @@ public class Project1Test {
     public void testCapacity() {
         assertEquals(5, runner.capacity());
         assertEquals(3, runner2.capacity());
-        runner2.addValue(3);
-        assertEquals(6, runner2.capacity());
+
     }
 
     /**
@@ -65,9 +64,6 @@ public class Project1Test {
     public void testGetCapacity() {
         assertEquals(5, runner.getCapacity());
         assertEquals(3, runner2.getCapacity());
-        runner2.addValue(3);
-        //Tests the addValue method.
-        assertEquals(6, runner2.getCapacity());
     }
 
     /**
@@ -77,6 +73,18 @@ public class Project1Test {
     public void testAddValue() {
         runner.addValue(3);
         assertEquals(1, runner.size());
+        boolean run = true;
+        while (run) {
+            try {
+                runner2.addValue(3);
+                run = false;
+            }
+
+            catch (IllegalStateException e) {
+                assertTrue(e instanceof IllegalStateException);
+                runner2 = runner;
+            }
+        }
     }
 
     /**
@@ -85,22 +93,8 @@ public class Project1Test {
     @Test
     public void testGetValue() {
         assertEquals(3, runner2.getValue(2));
+        int num = 3;
         boolean run = true;
-        while (run) {
-            try {
-                runner2.getValue(3);
-                run = false;
-            }
-
-            catch (IndexOutOfBoundsException e) {
-                assertTrue(e instanceof IndexOutOfBoundsException);
-                runner2.addValue(6);
-            }
-            assertEquals(6, runner2.getValue(3));
-        }
-
-        run = true;
-        int num = -3;
         while (run) {
             try {
                 runner2.getValue(num);
@@ -109,10 +103,24 @@ public class Project1Test {
 
             catch (IndexOutOfBoundsException e) {
                 assertTrue(e instanceof IndexOutOfBoundsException);
-                runner2.addValue(6);
-                num = 3;
+                num = 2;
             }
-            assertEquals(6, runner2.getValue(3));
+            assertEquals(3, runner2.getValue(num));
+        }
+
+        run = true;
+        num = -3;
+        while (run) {
+            try {
+                runner2.getValue(num);
+                run = false;
+            }
+
+            catch (IndexOutOfBoundsException e) {
+                assertTrue(e instanceof IndexOutOfBoundsException);
+                num = 2;
+            }
+            assertEquals(3, runner2.getValue(num));
         }
     }
 
@@ -137,6 +145,19 @@ public class Project1Test {
             }
         }
 
+        run = true;
+        int num = -2;
+        while (run) {
+            try {
+                runner.setValue(num, 2);
+                run = false;
+            }
+
+            catch (IndexOutOfBoundsException e) {
+                assertTrue(e instanceof IndexOutOfBoundsException);
+                num = 1;
+            }
+        }
 
     }
    
@@ -145,8 +166,21 @@ public class Project1Test {
      */
     @Test
     public void testAddRandom() {
+        
         runner.addRandom(3);
         assertEquals(3, runner.size());
+        boolean run = true;
+        while (run) {
+            try {
+                runner2.addRandom(2);
+                run = false;
+            }
+
+            catch (IllegalStateException e) {
+                assertTrue(e instanceof IllegalStateException);
+                runner2 = runner;
+            }
+        }
     }
 
     /**
@@ -157,6 +191,30 @@ public class Project1Test {
         runner2.removeValueAt(0);
         assertEquals(2, runner2.size());
         assertEquals(5, runner2.getValue(0));
+        boolean run = true;
+        int num = -2;
+        while (run) {
+            try {
+                runner2.removeValueAt(num);
+                run = false;
+            } catch (IndexOutOfBoundsException e) {
+                assertTrue(e instanceof IndexOutOfBoundsException);
+                num = 0;
+            }
+        }
+        
+        num = 4;
+
+        while (!run) {
+            try {
+                runner2.removeValueAt(num);
+                run = true;
+            }
+            catch (IndexOutOfBoundsException e) {
+                assertTrue(e instanceof IndexOutOfBoundsException);
+                num = 0;
+            }
+        }
     }
 
     /**
@@ -184,8 +242,9 @@ public class Project1Test {
     public void testHasDuplicates() {
         assertFalse(runner2.hasDuplicates());
         assertFalse(runner.hasDuplicates());
-        runner2.addValue(5);
-        assertTrue(runner2.hasDuplicates());
+        runner.addValue(2);
+        runner.addValue(2);
+        assertTrue(runner.hasDuplicates());
     }
 
     /**
@@ -195,7 +254,7 @@ public class Project1Test {
     public void testGetMinimum() {
         assertEquals(2, runner2.getMinimum());
         assertEquals(Integer.MIN_VALUE, runner.getMinimum());
-        runner2.addValue(0);
+        runner2.setValue(2, 0);
         assertEquals(0, runner2.getMinimum());
 
     }
@@ -207,7 +266,7 @@ public class Project1Test {
     public void testGetMaximum() {
         assertEquals(5, runner2.getMaximum());
         assertEquals(Integer.MAX_VALUE, runner.getMaximum());
-        runner2.addValue(45);
+        runner2.setValue(2, 45);
         assertEquals(45, runner2.getMaximum());
     }
 
@@ -218,8 +277,7 @@ public class Project1Test {
     public void testGetAverage() {
         assertEquals(10/3, runner2.getAverage(), .5);
         assertEquals(0, runner.getAverage(), .5);
-        runner2.addValue(6);
-        assertEquals(4, runner2.getAverage(), .5);
+        
     }
 
     /**

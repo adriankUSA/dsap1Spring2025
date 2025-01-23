@@ -12,7 +12,7 @@ public class Project1 implements ArrayInt {
 
     /**
      * Constructor.
-     * @param capacity, an int the length of the initial array.
+     * @param capacity an int the length of the initial array.
      */
     public Project1(int capacity) {
         this.arr = new int[capacity];
@@ -37,15 +37,11 @@ public class Project1 implements ArrayInt {
 
     /**
      * This method adds a value to the array.
-     * @param value, an integer to add to the array.
+     * @param value an integer to add to the array.
      */
-    public void addValue(int value) {
+    public void addValue(int value) throws IllegalStateException {
         if (this.size() == this.capacity()) {
-            int[] newArr = new int[2 * capacity()];
-            for (int i = 0; i < this.capacity(); i++) {
-                newArr[i] = arr[i];
-            }
-            arr = newArr;
+            throw new IllegalStateException();
         }
         arr[this.size()] = value;
         size++;
@@ -61,7 +57,7 @@ public class Project1 implements ArrayInt {
 
     /**
      * This method returns the element at a given index.
-     * @param index, the integer index to access.
+     * @param index the integer index to access.
      * @return int arr[index], the integer accessed.
      */
     public int getValue(int index) throws IndexOutOfBoundsException {
@@ -73,8 +69,8 @@ public class Project1 implements ArrayInt {
 
     /**
      * This method sets the value at a specified index.
-     * @param index, the int index number whose element should be changed.
-     * @param value, the int value to change the original element to.
+     * @param index the int index number whose element should be changed.
+     * @param value the int value to change the original element to.
      * @return int, the new element.
      */
     public int setValue(int index, int value) throws IndexOutOfBoundsException {
@@ -89,9 +85,12 @@ public class Project1 implements ArrayInt {
 
     /**
      * This method adds n amount of random integers.
-     * @param n, the int number of times a random integer should be added
+     * @param n the int number of times a random integer should be added
      */
-    public void addRandom(int n) {
+    public void addRandom(int n) throws IllegalStateException {
+        if (this.size() == this.capacity()) {
+            throw new IllegalStateException();
+        }
         //What should be the max int for the random number?
         Random rand = new Random();
 
@@ -102,9 +101,13 @@ public class Project1 implements ArrayInt {
 
     /**
      * This method removes a value at a given index.
-     * @param index, the int index of the value to be removed.
+     * @param index the int index of the value to be removed.
      */
-    public void removeValueAt(int index) {
+    public void removeValueAt(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
         for (int i = index; i < this.size() - 1; i++) {
             arr[i] = arr[i + 1];
         }
