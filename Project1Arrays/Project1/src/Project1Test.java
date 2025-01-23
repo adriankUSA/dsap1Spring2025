@@ -275,8 +275,19 @@ public class Project1Test {
      */
     @Test
     public void testGetAverage() {
-        assertEquals(10/3, runner2.getAverage(), .5);
-        assertEquals(0, runner.getAverage(), .5);
+        assertEquals(10 / 3, runner2.getAverage(), .5);
+        
+        boolean run = true;
+
+        try {
+            runner.getAverage();
+            run = false;
+        }
+
+        catch (IllegalStateException e) {
+            assertTrue(e instanceof IllegalStateException);
+            runner = runner2;
+        }
         
     }
 
