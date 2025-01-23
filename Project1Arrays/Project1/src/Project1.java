@@ -61,7 +61,7 @@ public class Project1 implements ArrayInt {
      * @return int arr[index], the integer accessed.
      */
     public int getValue(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= arr.length) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         return arr[index];
@@ -75,7 +75,7 @@ public class Project1 implements ArrayInt {
      */
     public int setValue(int index, int value) throws IndexOutOfBoundsException {
         //should not grow the array
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -104,7 +104,7 @@ public class Project1 implements ArrayInt {
      * @param index the int index of the value to be removed.
      */
     public void removeValueAt(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -198,15 +198,16 @@ public class Project1 implements ArrayInt {
      * This method returns the average of all the numbers in the array.
      * @return int average, the average of the numbers in the array.
      */
-    public double getAverage() {
+    public double getAverage() throws IllegalStateException {
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
+
         double sum = 0;
         for (int i = 0; i < this.size(); i++) {
             sum += arr[i];
         }
-        if (sum == 0) {
-            return 0;
-        }
-        //Shouldn't the average be a double?
+
         return sum / this.size();
     }
 
