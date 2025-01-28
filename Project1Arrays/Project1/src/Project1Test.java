@@ -85,6 +85,10 @@ public class Project1Test {
                 runner2 = runner;
             }
         }
+        runner.setValue(0, 0);
+        assertEquals(0, runner.getValue(0));
+        assertEquals(2, runner.size());
+        
     }
 
     /**
