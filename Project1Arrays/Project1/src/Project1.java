@@ -43,8 +43,8 @@ public class Project1 implements ArrayInt {
         if (this.size() == this.capacity()) {
             throw new IllegalStateException();
         }
-        arr[this.size()] = value;
-        size++;
+        arr[size++] = value;
+        
     }
 
     /**
@@ -111,7 +111,8 @@ public class Project1 implements ArrayInt {
         for (int i = index; i < this.size() - 1; i++) {
             arr[i] = arr[i + 1];
         }
-        arr[arr.length - 1] = 0;
+        //don't need
+        //arr[arr.length - 1] = 0;
         size--;
     }
 

@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/*.jar",
+        "c:\\Users\\adria\\OneDrive\\Documents\\ITSC 2214\\2nd take\\jarts\\hamcrest-core-1.3.jar",
+        "c:\\Users\\adria\\OneDrive\\Documents\\ITSC 2214\\2nd take\\jarts\\itsc2214.jar",
+        "c:\\Users\\adria\\OneDrive\\Documents\\ITSC 2214\\2nd take\\jarts\\junit-4.13.2.jar"
+    ]
+}

@@ -202,19 +202,33 @@ public class Project1Test {
                 num = 0;
             }
         }
-        
+
         num = 4;
 
         while (!run) {
             try {
                 runner2.removeValueAt(num);
                 run = true;
-            }
-            catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 assertTrue(e instanceof IndexOutOfBoundsException);
                 num = 0;
             }
         }
+    }
+    
+    /**
+     * testing removeValueAt(negative parameter).
+     */
+    @Test(expected = IndexOutOfBoundsException.class) 
+    public void testRemoveNegativeException() {
+        runner2.removeValueAt(-3);
+    }
+    
+    /**
+     * testing removeValueAt() an index out of bounds. */    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveOutOfBounds() {
+        runner2.removeValueAt(7);
     }
 
     /**
@@ -276,21 +290,30 @@ public class Project1Test {
     @Test
     public void testGetAverage() {
         assertEquals(10 / 3, runner2.getAverage(), .5);
-        
-        boolean run = true;
 
+        /*
+        boolean run = true;
+        
         try {
             runner.getAverage();
             run = false;
         }
-
+        
         catch (IllegalStateException e) {
             assertTrue(e instanceof IllegalStateException);
             runner = runner2;
         }
-        
+            */
+
     }
 
+    /**
+     * testing getAverage() if the array is empty.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testGetAverageEmptyArray() {
+        runner.getAverage();
+    }
     /**
      * Testing getRange() method.
      */
